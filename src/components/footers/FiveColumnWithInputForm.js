@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
+import * as ROUTES from "../../constants/routes";
 
 import LogoImage from "../../images/logo.svg";
 import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
@@ -56,70 +57,46 @@ export default () => {
       <Content>
         <SixColumns>
           <Column>
-            <ColumnHeading>Main</ColumnHeading>
+            <ColumnHeading>Principal</ColumnHeading>
             <LinkList>
-              <LinkListItem>
-                <Link href="#">Blog</Link>
-              </LinkListItem>
               <LinkListItem>
                 <Link href="#">FAQs</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Support</Link>
+                <Link href={ROUTES.CONTACT_US}>Support</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">About Us</Link>
+                <Link href={ROUTES.ABOUT_US}>A propos de nous</Link>
               </LinkListItem>
             </LinkList>
           </Column>
           <Column>
-            <ColumnHeading>Product</ColumnHeading>
+            <ColumnHeading>Produit</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Log In</Link>
+                <Link href={ROUTES.LOGIN}>Se Connecter</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Personal</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Business</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Team</Link>
+                <Link href="#">Équipe</Link>
               </LinkListItem>
             </LinkList>
           </Column>
           <Column>
-            <ColumnHeading>Press</ColumnHeading>
+            <ColumnHeading>Presse</ColumnHeading>
             <LinkList>
               <LinkListItem>
                 <Link href="#">Logos</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Events</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Stories</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Office</Link>
+                <Link href="#">Evenements</Link>
               </LinkListItem>
             </LinkList>
           </Column>
           <Column>
-            <ColumnHeading>Legal</ColumnHeading>
+            <ColumnHeading>Légal</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">GDPR</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Privacy Policy</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Terms of Service</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Disclaimer</Link>
+                <Link href="#">Conditions d'utilisation</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -147,7 +124,7 @@ export default () => {
             &copy; Made with ❤️ &nbsp;by Julien
           </CopywrightNotice>
           <SocialLinksContainer>
-            <SocialLink href="https://facebook.com">
+            <SocialLink href="https://www.facebook.com/groups/cook4me.be">
               <FacebookIcon />
             </SocialLink>
             <SocialLink href="https://www.instagram.com/cook4me_be/">

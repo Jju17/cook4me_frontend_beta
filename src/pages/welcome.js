@@ -15,7 +15,7 @@ import chefIconImageSrc from "../images/chef-icon.svg";
 import celebrationIconImageSrc from "../images/celebration-icon.svg";
 import shopIconImageSrc from "../images/shop-icon.svg";
 
-export default () => {
+export default function Welcome() {
   const Subheading = tw.span`tracking-wider text-sm font-medium`;
   const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
   const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
@@ -31,7 +31,7 @@ export default () => {
             <HighlightedText>délicieux & abordable</HighlightedText>
           </>
         }
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        description=""
         imageSrc="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80"
         imageCss={imageCss}
         imageDecoratorBlob={true}
@@ -48,12 +48,10 @@ export default () => {
         }
         description={
           <Description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Description
             <br />
             <br />
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat.
+            Description 2
           </Description>
         }
         buttonRounded={false}
@@ -111,12 +109,12 @@ export default () => {
         subheading=""
         heading={
           <>
-            Je suis{" "}
+            Ils sont{" "}
             <HighlightedText>
               <TextLoop springConfig={{ stiffness: 180, damping: 8 }}>
-                <span>ravi.</span>
-                <span>impressioné.</span>
-                <span>rassasié.</span>
+                <span>ravis.</span>
+                <span>impressionés.</span>
+                <span>rassasiés.</span>
               </TextLoop>
             </HighlightedText>
           </>
@@ -133,4 +131,4 @@ export default () => {
       <Footer />
     </>
   );
-};
+}

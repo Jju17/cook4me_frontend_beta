@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import * as ROUTES from "../../constants/routes";
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 
@@ -37,7 +38,7 @@ export const LogoLink = styled(NavLink)`
   ${tw`flex items-center font-black border-b-0 text-2xl! ml-0!`};
 
   img {
-    ${tw`w-16 mr-4`}
+    ${tw`w-12 mr-4`}
   }
 `;
 
@@ -78,13 +79,15 @@ export default ({
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">A propos</NavLink>
-      <NavLink href="/#">Blog</NavLink>
-      <NavLink href="/#">Nous Contacter</NavLink>
-      <NavLink href="/#" tw="lg:ml-12!">
+      <NavLink href={ROUTES.ABOUT_US}>A propos</NavLink>
+      <NavLink href={ROUTES.CONTACT_US}>Nous Contacter</NavLink>
+      <NavLink href={ROUTES.LOGIN} tw="lg:ml-12!">
         Connexion
       </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/#">
+      <PrimaryLink
+        css={roundedHeaderButton && tw`rounded-full`}
+        href={ROUTES.SIGN_UP}
+      >
         S'inscrire
       </PrimaryLink>
     </NavLinks>,
