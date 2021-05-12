@@ -75,7 +75,7 @@ export default ({
       url: "https://reddit.com",
     },
   ],
-  linkText = "Learn More",
+  linkText = "En savoir plus",
   heading = "",
   subheading = "",
   description = "",

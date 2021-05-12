@@ -36,7 +36,7 @@ export default () => {
         imageCss={imageCss}
         imageDecoratorBlob={true}
         primaryButtonText="Commander"
-        watchVideoButtonText="Découvre les Cookers"
+        watchVideoButtonText="Découvre le projet"
       />
       <MainFeature
         subheading={<Subheading>Depuis 2019 sur Louvain-La-Neuve</Subheading>}
