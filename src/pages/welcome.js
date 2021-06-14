@@ -16,6 +16,7 @@ import celebrationIconImageSrc from "../images/celebration-icon.svg";
 import shopIconImageSrc from "../images/shop-icon.svg";
 
 export default function Welcome() {
+  const StyledDiv = tw.div`font-display min-h-screen p-8 overflow-hidden`;
   const Subheading = tw.span`tracking-wider text-sm font-medium`;
   const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
   const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
@@ -23,7 +24,7 @@ export default function Welcome() {
   const imageCss = tw`rounded-4xl`;
 
   return (
-    <>
+    <StyledDiv>
       <Hero
         heading={
           <>
@@ -129,6 +130,6 @@ export default function Welcome() {
         }
       />
       <Footer />
-    </>
+    </StyledDiv>
   );
 }
