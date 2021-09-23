@@ -72,9 +72,9 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Veg Mixer",
+        title: "Salade Végétarienne",
         content: "Tomato Salad & Carrot",
-        price: "$5.99",
+        price: "6,00 €",
         rating: "5.0",
         reviews: "87",
         url: "#",
@@ -82,9 +82,9 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Macaroni",
-        content: "Cheese Pizza",
-        price: "$2.99",
+        title: "Wok au poulet & noix de cajou",
+        content: "Wok au poulet et noix de cajou",
+        price: "6,00 €",
         rating: "4.8",
         reviews: "32",
         url: "#",
@@ -92,9 +92,9 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327??ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Nelli",
-        content: "Hamburger & Fries",
-        price: "$7.99",
+        title: "Hamburger de Nelli",
+        content: "Hamburger & Frites",
+        price: "6,00 €",
         rating: "4.9",
         reviews: "89",
         url: "#",
@@ -102,9 +102,10 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Jalapeno Poppers",
-        content: "Crispy Soyabeans",
-        price: "$8.99",
+        title: "Poulet croustillant",
+        content:
+          "Poulet croustillant, potatoes de patates douce et salade menthe et grenade",
+        price: "6,00 €",
         rating: "4.6",
         reviews: "12",
         url: "#",
@@ -112,9 +113,9 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Cajun Chicken",
-        content: "Roasted Chicken & Egg",
-        price: "$7.99",
+        title: "Poulet Cajun",
+        content: "Oeufs et poulets frits",
+        price: "6,00 €",
         rating: "4.2",
         reviews: "19",
         url: "#",
@@ -122,9 +123,10 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1550461716-dbf266b2a8a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Chillie Cake",
-        content: "Deepfried Chicken",
-        price: "$2.99",
+        title: "Petit chili-cake",
+        content:
+          "Très sympatique pour une soirée entre copines! C'est simple et original et cela plaît à tous les coups",
+        price: "6,00 €",
         rating: "5.0",
         reviews: "61",
         url: "#",
@@ -132,9 +134,9 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Guacamole Mex",
-        content: "Mexican Chilli",
-        price: "$3.99",
+        title: "Apéro à la mexicaine",
+        content: "Parfait pour l'apéro",
+        price: "3,00 €",
         rating: "4.2",
         reviews: "95",
         url: "#",
@@ -142,9 +144,9 @@ export default ({
       {
         imageSrc:
           "https://images.unsplash.com/photo-1565310022184-f23a884f29da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-        title: "Carnet Nachos",
-        content: "Chilli Crispy Nachos",
-        price: "$3.99",
+        title: "Nachos & Patates cuites",
+        content: "Nachos croustillants accompagnés de ses patates au four",
+        price: "4,00 €",
         rating: "3.9",
         reviews: "26",
         url: "#",
