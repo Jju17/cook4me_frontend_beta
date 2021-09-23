@@ -79,6 +79,7 @@ export default ({
    */
   const defaultLinks = [
     <NavLinks key={1}>
+      <NavLink href={ROUTES.BECOMING_COOKER}>Devenir un Cooker</NavLink>
       <NavLink href={ROUTES.ABOUT_US}>A propos</NavLink>
       <NavLink href={ROUTES.CONTACT_US}>Nous Contacter</NavLink>
       <NavLink href={ROUTES.LOGIN} tw="lg:ml-12!">
