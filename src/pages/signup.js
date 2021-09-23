@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container as ContainerBase } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -8,6 +8,8 @@ import logo from "../images/logo.svg";
 import googleIconImageSrc from "../images/google-icon.png";
 import twitterIconImageSrc from "../images/twitter-icon.png";
 import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import FirebaseContext from "../context/firebase";
 
 const Container = tw(
   ContainerBase
@@ -54,8 +56,9 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-lg bg-contain bg-center bg-no-repeat`}
 `;
 
-export default ({
-  logoLinkUrl = "#",
+// eslint-disable-next-line import/no-anonymous-default-export
+export default function SignUp({
+  logoLinkUrl = "/",
   illustrationImageSrc = illustration,
   headingText = "S'enregistrer sur Cook4Me",
   //   socialButtons = [
@@ -74,19 +77,58 @@ export default ({
   SubmitButtonIcon = SignUpIcon,
   tosUrl = "#",
   privacyPolicyUrl = "#",
-  signInUrl = "#",
-}) => (
-  <>
-    <Container>
-      <Content>
-        <MainContainer>
-          <LogoLink href={logoLinkUrl}>
-            <LogoImage src={logo} />
-          </LogoLink>
-          <MainContent>
-            <Heading>{headingText}</Heading>
-            <FormContainer>
-              {/* <SocialButtonsContainer>
+  signInUrl = "login",
+}) {
+  const { firebase } = useContext(FirebaseContext);
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  const [error, setError] = useState("");
+  const isInvalid = emailAddress === "" || password === "";
+
+  useEffect(() => {
+    document.title = "Créer un compte - Cook4Me";
+  }, []);
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+
+    try {
+      const createdUserResult = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(emailAddress, password);
+
+      await createdUserResult.user.updateProfile({
+        displayName: username,
+      });
+
+      await firebase.firestore().collection("users").add({
+        userId: createdUserResult.user.uid,
+        username: username.toLowerCase(),
+        fullName,
+      });
+    } catch (error) {
+      setFullName("");
+      setEmailAddress("");
+      setPassword("");
+      setError(error.message);
+    }
+  };
+
+  return (
+    <>
+      <Container>
+        <Content>
+          <MainContainer>
+            <LogoLink href={logoLinkUrl}>
+              <LogoImage src={logo} />
+            </LogoLink>
+            <MainContent>
+              <Heading>{headingText}</Heading>
+              <FormContainer>
+                {/* <SocialButtonsContainer>
                 {socialButtons.map((socialButton, index) => (
                   <SocialButton key={index} href={socialButton.url}>
                     <span className="iconContainer">
@@ -100,40 +142,67 @@ export default ({
                   </SocialButton>
                 ))}
               </SocialButtonsContainer> */}
-              <DividerTextContainer>
-                <DividerText>Or Sign up with your e-mail</DividerText>
-              </DividerTextContainer>
-              <Form>
-                <Input type="email" placeholder="Email" />
-                <Input type="password" placeholder="Password" />
-                <SubmitButton type="submit">
-                  <SubmitButtonIcon className="icon" />
-                  <span className="text">{submitButtonText}</span>
-                </SubmitButton>
-                <p tw="mt-6 text-xs text-gray-600 text-center">
-                  J'accepte les{" "}
-                  <a href={tosUrl} tw="border-b border-gray-500 border-dotted">
-                    Conditions d'utilisation
-                  </a>
-                </p>
+                <DividerTextContainer>
+                  <DividerText>Or Sign up with your e-mail</DividerText>
+                </DividerTextContainer>
+                {error && (
+                  <p className="mb-4 text-xs text-red-500 text-center">
+                    {error}
+                  </p>
+                )}
+                <Form onSubmit={handleSignUp}>
+                  <Input
+                    type="text"
+                    placeholder="Full Name"
+                    value={fullName}
+                    onChange={({ target }) => setFullName(target.value)}
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={emailAddress}
+                    onChange={({ target }) =>
+                      setEmailAddress(target.value.toLowerCase())
+                    }
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={({ target }) => setPassword(target.value)}
+                  />
+                  <SubmitButton type="submit" disabled={isInvalid}>
+                    <SubmitButtonIcon className="icon" />
+                    <span className="text">{submitButtonText}</span>
+                  </SubmitButton>
+                  <p tw="mt-6 text-xs text-gray-600 text-center">
+                    J'accepte les{" "}
+                    <a
+                      href={tosUrl}
+                      tw="border-b border-gray-500 border-dotted"
+                    >
+                      Conditions d'utilisation
+                    </a>
+                  </p>
 
-                <p tw="mt-8 text-sm text-gray-600 text-center">
-                  Déjà membre?{" "}
-                  <a
-                    href={signInUrl}
-                    tw="border-b border-gray-500 border-dotted"
-                  >
-                    Connexion
-                  </a>
-                </p>
-              </Form>
-            </FormContainer>
-          </MainContent>
-        </MainContainer>
-        <IllustrationContainer>
-          <IllustrationImage imageSrc={illustrationImageSrc} />
-        </IllustrationContainer>
-      </Content>
-    </Container>
-  </>
-);
+                  <p tw="mt-8 text-sm text-gray-600 text-center">
+                    Déjà membre?{" "}
+                    <a
+                      href={signInUrl}
+                      tw="border-b border-gray-500 border-dotted"
+                    >
+                      Connexion
+                    </a>
+                  </p>
+                </Form>
+              </FormContainer>
+            </MainContent>
+          </MainContainer>
+          <IllustrationContainer>
+            <IllustrationImage imageSrc={illustrationImageSrc} />
+          </IllustrationContainer>
+        </Content>
+      </Container>
+    </>
+  );
+}

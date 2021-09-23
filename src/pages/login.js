@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container as ContainerBase } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -54,8 +54,9 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
-export default ({
-  logoLinkUrl = "#",
+// eslint-disable-next-line import/no-anonymous-default-export
+export default function Login(
+  logoLinkUrl = "welcome",
   illustrationImageSrc = illustration,
   headingText = "Se Connecter sur Cook4Me",
   //   socialButtons = [
@@ -73,19 +74,24 @@ export default ({
   submitButtonText = "Connexion",
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",
-  signupUrl = "#",
-}) => (
-  <>
-    <Container>
-      <Content>
-        <MainContainer>
-          <LogoLink href={logoLinkUrl}>
-            <LogoImage src={logo} />
-          </LogoLink>
-          <MainContent>
-            <Heading>{headingText}</Heading>
-            <FormContainer>
-              {/* <SocialButtonsContainer>
+  signupUrl = "signup"
+) {
+  useEffect(() => {
+    document.title = "Connexion - Cook4Me";
+  }, []);
+
+  return (
+    <>
+      <Container>
+        <Content>
+          <MainContainer>
+            <LogoLink href={logoLinkUrl}>
+              <LogoImage src={logo} />
+            </LogoLink>
+            <MainContent>
+              <Heading>{headingText}</Heading>
+              <FormContainer>
+                {/* <SocialButtonsContainer>
                 {socialButtons.map((socialButton, index) => (
                   <SocialButton key={index} href={socialButton.url}>
                     <span className="iconContainer">
@@ -99,38 +105,42 @@ export default ({
                   </SocialButton>
                 ))}
               </SocialButtonsContainer> */}
-              <DividerTextContainer>
-                <DividerText>Se Connecter Avec Son e-mail</DividerText>
-              </DividerTextContainer>
-              <Form>
-                <Input type="email" placeholder="Email" />
-                <Input type="password" placeholder="Password" />
-                <SubmitButton type="submit">
-                  <SubmitButtonIcon className="icon" />
-                  <span className="text">{submitButtonText}</span>
-                </SubmitButton>
-              </Form>
-              <p tw="mt-6 text-xs text-gray-600 text-center">
-                <a
-                  href={forgotPasswordUrl}
-                  tw="border-b border-gray-500 border-dotted"
-                >
-                  Mot de passe oublié ?
-                </a>
-              </p>
-              <p tw="mt-8 text-sm text-gray-600 text-center">
-                Pas encore de compte?{" "}
-                <a href={signupUrl} tw="border-b border-gray-500 border-dotted">
-                  S'inscrire
-                </a>
-              </p>
-            </FormContainer>
-          </MainContent>
-        </MainContainer>
-        <IllustrationContainer>
-          <IllustrationImage imageSrc={illustrationImageSrc} />
-        </IllustrationContainer>
-      </Content>
-    </Container>
-  </>
-);
+                <DividerTextContainer>
+                  <DividerText>Se Connecter Avec Son e-mail</DividerText>
+                </DividerTextContainer>
+                <Form>
+                  <Input type="email" placeholder="Email" />
+                  <Input type="password" placeholder="Password" />
+                  <SubmitButton type="submit">
+                    <SubmitButtonIcon className="icon" />
+                    <span className="text">{submitButtonText}</span>
+                  </SubmitButton>
+                </Form>
+                <p tw="mt-6 text-xs text-gray-600 text-center">
+                  <a
+                    href={forgotPasswordUrl}
+                    tw="border-b border-gray-500 border-dotted"
+                  >
+                    Mot de passe oublié ?
+                  </a>
+                </p>
+                <p tw="mt-8 text-sm text-gray-600 text-center">
+                  Pas encore de compte?{" "}
+                  <a
+                    href={signupUrl}
+                    tw="border-b border-gray-500 border-dotted"
+                  >
+                    S'inscrire
+                  </a>
+                </p>
+              </FormContainer>
+            </MainContent>
+          </MainContainer>
+          <IllustrationContainer>
+            <IllustrationImage imageSrc={illustrationImageSrc} />
+          </IllustrationContainer>
+        </Content>
+      </Container>
+    </>
+  );
+}
