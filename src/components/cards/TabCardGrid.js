@@ -45,6 +45,14 @@ const CardRating = styled.div`
   }
 `;
 
+const CardCookerContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
+const CardCooker = styled.div`
+  ${tw`mr-1 text-sm font-bold flex items-end`}
+  svg {
+    ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
+  }
+`;
+
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 flex justify-center items-center`}
@@ -212,6 +220,9 @@ export default ({
                   animate="rest"
                 >
                   <CardImageContainer imageSrc={card.imageSrc}>
+                    <CardCookerContainer>
+                      <CardCooker></CardCooker>
+                    </CardCookerContainer>
                     <CardRatingContainer>
                       <CardRating>
                         <StarIcon />

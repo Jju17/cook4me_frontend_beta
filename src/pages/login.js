@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container as ContainerBase } from "../components/misc/Layouts";
+import { Link, useHistory } from "react-router-dom";
+import FirebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
 import illustration from "../images/login-illustration.svg";
 import logo from "../images/logo.svg";
 import googleIconImageSrc from "../images/google-icon.png";
@@ -76,6 +78,27 @@ export default function Login(
   forgotPasswordUrl = "#",
   signupUrl = "signup"
 ) {
+  const history = useHistory();
+  const { firebase } = useContext(FirebaseContext);
+
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
+  const isInvalid = password === "" || emailAddress === "";
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+      history.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      setEmailAddress("");
+      setPassword("");
+      setError(error.message);
+    }
+  };
   useEffect(() => {
     document.title = "Connexion - Cook4Me";
   }, []);
@@ -108,9 +131,18 @@ export default function Login(
                 <DividerTextContainer>
                   <DividerText>Se Connecter Avec Son e-mail</DividerText>
                 </DividerTextContainer>
-                <Form>
-                  <Input type="email" placeholder="Email" />
-                  <Input type="password" placeholder="Password" />
+                {error && <p className="mb-4 text-xs text-red-500">{error}</p>}
+                <Form onSubmit={handleLogin}>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    onChange={({ target }) => setEmailAddress(target.value)}
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    onChange={({ target }) => setPassword(target.value)}
+                  />
                   <SubmitButton type="submit">
                     <SubmitButtonIcon className="icon" />
                     <span className="text">{submitButtonText}</span>

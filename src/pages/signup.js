@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { Container as ContainerBase } from "../components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import twitterIconImageSrc from "../images/twitter-icon.png";
 import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import FirebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
 
 const Container = tw(
   ContainerBase
@@ -79,18 +81,14 @@ export default function SignUp({
   privacyPolicyUrl = "#",
   signInUrl = "login",
 }) {
+  const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
+
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
-
   const [error, setError] = useState("");
-  const isInvalid = emailAddress === "" || password === "";
-
-  useEffect(() => {
-    document.title = "Créer un compte - Cook4Me";
-  }, []);
+  const isInvalid = emailAddress === "" || password === "" || fullName === "";
 
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -101,14 +99,22 @@ export default function SignUp({
         .createUserWithEmailAndPassword(emailAddress, password);
 
       await createdUserResult.user.updateProfile({
-        displayName: username,
+        displayName: fullName.replace(/ /g, "").toLowerCase(),
       });
 
-      await firebase.firestore().collection("users").add({
-        userId: createdUserResult.user.uid,
-        username: username.toLowerCase(),
-        fullName,
-      });
+      await firebase
+        .firestore()
+        .collection("users")
+        .add({
+          userId: createdUserResult.user.uid,
+          username: fullName.replace(/ /g, "").toLowerCase(),
+          fullName,
+          emailAddress: emailAddress.toLowerCase(),
+          cookers_followed: [],
+          dateCreated: Date.now(),
+        });
+
+      history.push(ROUTES.DASHBOARD);
     } catch (error) {
       setFullName("");
       setEmailAddress("");
@@ -116,6 +122,10 @@ export default function SignUp({
       setError(error.message);
     }
   };
+
+  useEffect(() => {
+    document.title = "Créer un compte - Cook4Me";
+  }, []);
 
   return (
     <>
@@ -129,19 +139,19 @@ export default function SignUp({
               <Heading>{headingText}</Heading>
               <FormContainer>
                 {/* <SocialButtonsContainer>
-                {socialButtons.map((socialButton, index) => (
-                  <SocialButton key={index} href={socialButton.url}>
-                    <span className="iconContainer">
-                      <img
-                        src={socialButton.iconImageSrc}
-                        className="icon"
-                        alt=""
-                      />
-                    </span>
-                    <span className="text">{socialButton.text}</span>
-                  </SocialButton>
-                ))}
-              </SocialButtonsContainer> */}
+                  {socialButtons.map((socialButton, index) => (
+                    <SocialButton key={index} href={socialButton.url}>
+                      <span className="iconContainer">
+                        <img
+                          src={socialButton.iconImageSrc}
+                          className="icon"
+                          alt=""
+                        />
+                      </span>
+                      <span className="text">{socialButton.text}</span>
+                    </SocialButton>
+                  ))}
+                </SocialButtonsContainer> */}
                 <DividerTextContainer>
                   <DividerText>Or Sign up with your e-mail</DividerText>
                 </DividerTextContainer>

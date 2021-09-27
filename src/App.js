@@ -29,12 +29,12 @@ export default function App() {
             <Switch>
               <Route path={ROUTES.LOGIN} component={Login} />
               <Route path={ROUTES.SIGN_UP} component={SignUp} />
+              <Route path={ROUTES.DASHBOARD} component={Dashboard} />
               <Route path={ROUTES.CONTACT_US} component={ContactUs} />
               <Route path={ROUTES.ABOUT_US} component={AboutUs} />
-              <Route path={ROUTES.WELCOME} component={Welcome} />
+              <Route path={ROUTES.WELCOME} component={Welcome} exact />
               <Route path={ROUTES.PROFILE} component={Profile} />
               <Route path={ROUTES.BECOMING_COOKER} component={BecomingCooker} />
-              <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
               <Route component={NotFound} />
             </Switch>
           </Suspense>

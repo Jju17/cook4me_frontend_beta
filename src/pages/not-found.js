@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "../components/headers/light.js";
+import Footer from "../components/footers/FiveColumnWithInputForm";
 
 export default function NotFound() {
   useEffect(() => {
@@ -7,11 +8,12 @@ export default function NotFound() {
   }, []);
 
   return (
-    <div className="bg-gray">
-      <Header />
-      <div className="mx-auto max-w-screen-lg">
+    <div className="bg-gray h-screen flex flex-col">
+      <Header className="w-full" />
+      <div className="m-auto flex justify-center items-center">
         <p className="text-center text-2xl">Not Found!</p>
       </div>
+      <Footer className="flex items-end" />
     </div>
   );
 }
