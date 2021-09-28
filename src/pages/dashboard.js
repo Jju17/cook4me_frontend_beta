@@ -15,7 +15,7 @@ export default function Dashboard() {
       <TabGrid
         heading={
           <>
-            Qu'est ce qu'ils nous <HighlightedText>mijotent?</HighlightedText>
+            Qu'est ce qu'on mange <HighlightedText>Jeudi ?</HighlightedText>
           </>
         }
       />

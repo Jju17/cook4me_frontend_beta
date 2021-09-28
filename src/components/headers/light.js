@@ -62,6 +62,7 @@ export default function Header({ roundedHeaderButton = false }) {
           <NavLink to={ROUTES.DASHBOARD} arial-label="Home">
             Dashboard
           </NavLink>
+          <NavLink to={ROUTES.DASHBOARD}>Panier</NavLink>
 
           <button
             className={`focus:text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 whitespace-nowrap
