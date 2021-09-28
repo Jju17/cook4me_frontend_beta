@@ -43,6 +43,10 @@ export default function Header({ roundedHeaderButton = false }) {
 
   console.log("user : ", user);
 
+  function handleImgError() {
+    return `/images/avatars/pierre.jpg`;
+  }
+
   return (
     <HeaderTW>
       <LogoLink to="/">
@@ -81,6 +85,10 @@ export default function Header({ roundedHeaderButton = false }) {
               className="rounded-full h-8 w-8 flex items-end"
               src={`/images/avatars/${user.displayName}.jpg`}
               alt={`${user.displayName} profile picture`}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/images/avatars/pierre.jpg";
+              }}
             />
           </NavLink>
         </NavLinks>
