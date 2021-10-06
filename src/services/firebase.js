@@ -22,3 +22,8 @@ export async function getUserByUserId(userId) {
     docId: item.id,
   }));
 }
+
+export async function getAllMeals() {
+  const result = await firebase.firestore().collection("meals").get();
+  return result;
+}

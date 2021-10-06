@@ -17,6 +17,7 @@ const SignUp = lazy(() => import("./pages/signup"));
 const Profile = lazy(() => import("./pages/profile"));
 const NotFound = lazy(() => import("./pages/not-found"));
 const BecomingCooker = lazy(() => import("./pages/becoming-cooker"));
+const AdminCooker = lazy(() => import("./pages/admin-cooker"));
 
 export default function App() {
   const { user } = useAuthListener();
@@ -35,6 +36,7 @@ export default function App() {
               <Route path={ROUTES.WELCOME} component={Welcome} exact />
               <Route path={ROUTES.PROFILE} component={Profile} />
               <Route path={ROUTES.BECOMING_COOKER} component={BecomingCooker} />
+              <Route path={ROUTES.ADMIN_COOKER} component={AdminCooker} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>

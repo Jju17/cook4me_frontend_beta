@@ -14,14 +14,14 @@ const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`
 const Header = tw(SectionHeading)``;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
 
-const TabControl = styled.div`
-  ${tw`cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text-gray-600 font-medium rounded-sm transition duration-300 text-sm sm:text-base w-1/2 sm:w-auto text-center`}
-  &:hover {
-    ${tw`bg-gray-300 text-gray-700`}
-  }
-  ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}
-  }
-`;
+// const TabControl = styled.div`
+//   ${tw`cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text-gray-600 font-medium rounded-sm transition duration-300 text-sm sm:text-base w-1/2 sm:w-auto text-center`}
+//   &:hover {
+//     ${tw`bg-gray-300 text-gray-700`}
+//   }
+//   ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}
+//   }
+// `;
 
 const TabContent = tw(
   motion.div
@@ -73,10 +73,10 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-export default function TabCardGrid({
+export default function AdminTabCardGrid({
   heading = "Checkout the Menu",
   tabs = {
-    Entree: [
+    Entrée: [
       {
         imageSrc:
           "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
@@ -160,9 +160,6 @@ export default function TabCardGrid({
         url: "#",
       },
     ],
-    Plat: getRandomCards(),
-    Dessert: getRandomCards(),
-    Divers: getRandomCards(),
   },
 }) {
   /*
@@ -178,7 +175,7 @@ export default function TabCardGrid({
       <ContentWithPaddingXl>
         <HeaderRow>
           <Header>{heading}</Header>
-          <TabsControl>
+          {/* <TabsControl>
             {Object.keys(tabs).map((tabName, index) => (
               <TabControl
                 key={index}
@@ -188,7 +185,7 @@ export default function TabCardGrid({
                 {tabName}
               </TabControl>
             ))}
-          </TabsControl>
+          </TabsControl> */}
         </HeaderRow>
 
         {tabsKeys.map((tabKey, index) => (
@@ -219,9 +216,7 @@ export default function TabCardGrid({
                   whileHover="hover"
                   animate="rest"
                 >
-                  <CardImageContainer
-                    imageSrc={/*card.imageSrc*/ `./images/avatars/pierre.jpg`}
-                  >
+                  <CardImageContainer imageSrc={card.imageSrc}>
                     <CardCookerContainer>
                       <CardCooker></CardCooker>
                     </CardCookerContainer>
@@ -245,13 +240,13 @@ export default function TabCardGrid({
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <CardButton>Commander</CardButton>
+                      <CardButton>Gérer mon repas</CardButton>
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>
                     <CardTitle>{card.title}</CardTitle>
-                    <CardContent>{card.desc}</CardContent>
-                    <CardPrice>{card.price} €</CardPrice>
+                    <CardContent>{card.content}</CardContent>
+                    <CardPrice>{card.price}</CardPrice>
                   </CardText>
                 </Card>
               </CardContainer>
@@ -351,5 +346,5 @@ const getRandomCards = () => {
   ];
 
   // Shuffle array
-  return cards.sort(() => Math.random() - 0.5);
+  return cards;
 };

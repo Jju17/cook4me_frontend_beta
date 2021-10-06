@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
@@ -41,7 +41,7 @@ export default function Header({ roundedHeaderButton = false }) {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
 
-  console.log("user : ", user);
+  const [isCooker, setIsCooker] = useState(true);
 
   function handleImgError() {
     return `/images/avatars/pierre.jpg`;
@@ -56,7 +56,11 @@ export default function Header({ roundedHeaderButton = false }) {
 
       {user ? (
         <NavLinks>
-          <NavLink to={ROUTES.BECOMING_COOKER}>Devenir un Cooker</NavLink>
+          {isCooker ? (
+            <NavLink to={ROUTES.ADMIN_COOKER}>Mes Plats</NavLink>
+          ) : (
+            <NavLink to={ROUTES.BECOMING_COOKER}>Devenir un Cooker</NavLink>
+          )}
           <NavLink to={ROUTES.ABOUT_US}>A propos</NavLink>
           <NavLink to={ROUTES.CONTACT_US}>Nous Contacter</NavLink>
           <NavLink to={ROUTES.DASHBOARD} arial-label="Home">

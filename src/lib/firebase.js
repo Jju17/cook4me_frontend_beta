@@ -1,4 +1,4 @@
-//import { seedDatabase } from '../seed';
+// import { seedDatabase } from "../seed";
 import fb from "firebase";
 
 const firebaseConfig = {
@@ -13,6 +13,6 @@ const firebaseConfig = {
 const firebase = fb.initializeApp(firebaseConfig);
 const { FieldValue } = fb.firestore;
 
-//seedDatabase(firebase);
+// seedDatabase(firebase);
 
 export { firebase, FieldValue };
