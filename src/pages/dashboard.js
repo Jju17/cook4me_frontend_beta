@@ -1,9 +1,17 @@
 import React, { useEffect, useContext, useState } from "react";
+import fb from "firebase";
+
 import tw from "twin.macro";
 import Header from "../components/headers/light";
 import TabGrid from "../components/cards/TabCardGrid.js";
 import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import FirebaseContext from "../context/firebase";
+import {
+  getStarters,
+  getMainDishes,
+  getDesserts,
+  getExtras,
+} from "../services/firebase";
 
 export default function Dashboard() {
   const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
@@ -13,99 +21,26 @@ export default function Dashboard() {
   const [desserts, setDessert] = useState([]);
   const [extras, setExtra] = useState([]);
 
-  async function getStarters() {
-    let meals = [];
-
-    await firebase
-      .firestore()
-      .collection("meals")
-      .where("type", "==", "entree")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          //   console.log(doc.id, " => ", doc.data());
-          meals.push(doc.data());
-        });
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-    setStarters(meals);
-  }
-
-  async function getMainDishes() {
-    let meals = [];
-
-    await firebase
-      .firestore()
-      .collection("meals")
-      .where("type", "==", "plat")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          //   console.log(doc.id, " => ", doc.data());
-          meals.push(doc.data());
-        });
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-    setMainDishes(meals);
-  }
-
-  async function getDesserts() {
-    let meals = [];
-
-    await firebase
-      .firestore()
-      .collection("meals")
-      .where("type", "==", "dessert")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          //   console.log(doc.id, " => ", doc.data());
-          meals.push(doc.data());
-        });
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-    setDessert(meals);
-  }
-
-  async function getExtras() {
-    let meals = [];
-
-    await firebase
-      .firestore()
-      .collection("meals")
-      .where("type", "==", "extra")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          //   console.log(doc.id, " => ", doc.data());
-          meals.push(doc.data());
-        });
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-    setExtra(meals);
-  }
-
   useEffect(() => {
-    getStarters();
-    getMainDishes();
-    getDesserts();
-    getExtras();
+    getStarters().then((value) => {
+      setStarters(value);
+    });
+
+    getMainDishes().then((value) => {
+      setMainDishes(value);
+    });
+
+    getDesserts().then((value) => {
+      setDessert(value);
+    });
+
+    getExtras().then((value) => {
+      setExtra(value);
+    });
   }, []);
 
   useEffect(() => {
-    document.title = "Dashboard";
+    document.title = "C4M - Dashboard";
   }, []);
 
   return (
@@ -128,10 +63,3 @@ export default function Dashboard() {
     </>
   );
 }
-
-// tabs={
-//     Entree: starters,
-//     Plat: mainDishes,
-//     Dessert: desserts,
-//     Divers: extras,
-// }

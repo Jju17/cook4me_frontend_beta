@@ -1,3 +1,4 @@
+import fb from "firebase";
 import { firebase, FieldValue } from "../lib/firebase";
 
 export async function doesUsernameExist(username) {
@@ -26,4 +27,96 @@ export async function getUserByUserId(userId) {
 export async function getAllMeals() {
   const result = await firebase.firestore().collection("meals").get();
   return result;
+}
+
+export async function getStarters() {
+  let meals = [];
+  var actualDate = fb.firestore.Timestamp.fromDate(new Date(Date.now()));
+
+  await firebase
+    .firestore()
+    .collection("meals")
+    .where("type", "==", "entree")
+    .where("dateAvailable", ">", actualDate)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        //   console.log(doc.id, " => ", doc.data());
+        meals.push(doc.data());
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+  return meals;
+}
+
+export async function getMainDishes() {
+  let meals = [];
+  var actualDate = fb.firestore.Timestamp.fromDate(new Date(Date.now()));
+
+  await firebase
+    .firestore()
+    .collection("meals")
+    .where("type", "==", "plat")
+    .where("dateAvailable", ">", actualDate)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        //   console.log(doc.id, " => ", doc.data());
+        meals.push(doc.data());
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+  return meals;
+}
+
+export async function getDesserts() {
+  let meals = [];
+  var actualDate = fb.firestore.Timestamp.fromDate(new Date(Date.now()));
+
+  await firebase
+    .firestore()
+    .collection("meals")
+    .where("type", "==", "dessert")
+    .where("dateAvailable", ">", actualDate)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        //   console.log(doc.id, " => ", doc.data());
+        meals.push(doc.data());
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+  return meals;
+}
+
+export async function getExtras() {
+  let meals = [];
+  var actualDate = fb.firestore.Timestamp.fromDate(new Date(Date.now()));
+
+  await firebase
+    .firestore()
+    .collection("meals")
+    .where("type", "==", "extra")
+    .where("dateAvailable", ">", actualDate)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        //   console.log(doc.id, " => ", doc.data());
+        meals.push(doc.data());
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+  return meals;
 }

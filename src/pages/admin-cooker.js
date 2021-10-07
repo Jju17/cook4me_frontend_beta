@@ -10,16 +10,21 @@ export default function AdminCooker() {
     document.title = "Administration des plats";
   }, []);
   return (
-    <>
+    <div className="bg-gray h-screen flex flex-col">
       <Header />
-      <TabGrid
-        heading={
-          <>
-            Gère tes <HighlightedText>Chefs d'oeuvres</HighlightedText>
-          </>
-        }
-      />
+      <div className="m-auto flex justify-center items-center flex-col">
+        <p className="text-center text-2xl">
+          Coming soon, pour modifier tes plats, adresse toi à un administrateur!
+        </p>
+
+        <a
+          href="https://www.facebook.com/julien.rahier"
+          className="text-center text-2xl text-blue-700"
+        >
+          Contacter un administrateur
+        </a>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }

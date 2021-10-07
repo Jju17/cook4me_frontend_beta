@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import TextLoop from "react-text-loop";
@@ -14,6 +14,12 @@ import Footer from "../components/footers/FiveColumnWithInputForm.js";
 import chefIconImageSrc from "../images/chef-icon.svg";
 import celebrationIconImageSrc from "../images/celebration-icon.svg";
 import shopIconImageSrc from "../images/shop-icon.svg";
+import {
+  getStarters,
+  getMainDishes,
+  getDesserts,
+  getExtras,
+} from "../services/firebase";
 
 export default function Welcome() {
   const Subheading = tw.span`tracking-wider text-sm font-medium`;
@@ -21,6 +27,33 @@ export default function Welcome() {
   const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
   const Description = tw.span`inline-block mt-8`;
   const imageCss = tw`rounded-4xl`;
+
+  const [starters, setStarters] = useState([]);
+  const [mainDishes, setMainDishes] = useState([]);
+  const [desserts, setDessert] = useState([]);
+  const [extras, setExtra] = useState([]);
+
+  const myMealsRef = useRef();
+  const executeScroll = () =>
+    myMealsRef.current.scrollIntoView({ behavior: "smooth" });
+
+  useEffect(() => {
+    getStarters().then((value) => {
+      setStarters(value);
+    });
+
+    getMainDishes().then((value) => {
+      setMainDishes(value);
+    });
+
+    getDesserts().then((value) => {
+      setDessert(value);
+    });
+
+    getExtras().then((value) => {
+      setExtra(value);
+    });
+  }, []);
 
   return (
     <>
@@ -35,8 +68,9 @@ export default function Welcome() {
         imageSrc="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80"
         imageCss={imageCss}
         imageDecoratorBlob={true}
-        primaryButtonText="Commander"
+        primaryButtonText="Voir les plats"
         watchVideoButtonText="Découvre le projet"
+        executeScroll={executeScroll}
       />
       <MainFeature
         subheading={<Subheading>Depuis 2019 sur Louvain-La-Neuve</Subheading>}
@@ -65,13 +99,21 @@ export default function Welcome() {
         imageDecoratorBlobCss={tw`left-1/2 -translate-x-1/2 md:w-32 md:h-32 opacity-25`}
       />
       {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
-      <TabGrid
-        heading={
-          <>
-            Qu'est ce qu'ils nous <HighlightedText>mijotent?</HighlightedText>
-          </>
-        }
-      />
+      <div ref={myMealsRef}>
+        <TabGrid
+          heading={
+            <>
+              Qu'est ce qu'ils nous <HighlightedText>mijotent?</HighlightedText>
+            </>
+          }
+          tabs={{
+            Entree: starters,
+            Plat: mainDishes,
+            Dessert: desserts,
+            Divers: extras,
+          }}
+        />
+      </div>
       <Features
         heading={
           <>
@@ -84,21 +126,21 @@ export default function Welcome() {
             title: "Une ville",
             description:
               "Nous nous concentrons d'abord sur l'essentiel, nous rêvons ensuite.",
-            url: "https://google.com",
+            url: "",
           },
           {
             imageSrc: chefIconImageSrc,
             title: "Des Cookers sélectionnés",
             description:
-              "Chaque cooker à du passer une interview afin de montrer sa motivation.",
-            url: "https://timerse.com",
+              "Chaque cooker a du passer une interview afin de montrer sa motivation.",
+            url: "",
           },
           {
             imageSrc: celebrationIconImageSrc,
             title: "Un bon plat, à petit prix",
             description:
               "Malgré le service apporté, les plats restent abordables.",
-            url: "https://reddit.com",
+            url: "",
           },
         ]}
         imageContainerCss={tw`p-2!`}
@@ -120,14 +162,14 @@ export default function Welcome() {
           </>
         }
       />
-      <DownloadApp
+      {/* <DownloadApp
         text={
           <>
             Les gens autour de vous commandent facilement avec l'app{" "}
             <HighlightedTextInverse>Cook4Me.</HighlightedTextInverse>
           </>
         }
-      />
+      /> */}
       <Footer />
     </>
   );
