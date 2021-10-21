@@ -8,3 +8,4 @@ export const PROFILE = "/p/:username";
 export const NOT_FOUND = "/not-found";
 export const BECOMING_COOKER = "/becoming-cooker";
 export const ADMIN_COOKER = "/admin-cooker";
+export const CART = "/cart";

@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, useState } from "react";
-import fb from "firebase";
+import React, { useEffect, useState } from "react";
 
 import tw from "twin.macro";
 import Header from "../components/headers/light";
-import TabGrid from "../components/cards/TabCardGrid.js";
 import Footer from "../components/footers/FiveColumnWithInputForm.js";
-import FirebaseContext from "../context/firebase";
+import TabGrid from "../components/cards/TabCardGrid.js";
+import { ContentWithPaddingXl } from "../components/misc/Layouts.js";
+
 import {
   getStarters,
   getMainDishes,
@@ -15,7 +15,6 @@ import {
 
 export default function Dashboard() {
   const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
-  const { firebase } = useContext(FirebaseContext);
   const [starters, setStarters] = useState([]);
   const [mainDishes, setMainDishes] = useState([]);
   const [desserts, setDessert] = useState([]);
@@ -46,19 +45,23 @@ export default function Dashboard() {
   return (
     <>
       <Header />
-      <TabGrid
-        heading={
-          <>
-            Qu'est ce qu'on mange <HighlightedText>Jeudi ?</HighlightedText>
-          </>
-        }
-        tabs={{
-          Entree: starters,
-          Plat: mainDishes,
-          Dessert: desserts,
-          Divers: extras,
-        }}
-      />
+      <ContentWithPaddingXl>
+        <TabGrid
+          heading={
+            /* TODO: Faire en sorte que le jour s'update automatiquement */
+            <>
+              Qu'est ce qu'on mange{" "}
+              <HighlightedText>cette semaine ?</HighlightedText>
+            </>
+          }
+          tabs={{
+            Entree: starters,
+            Plat: mainDishes,
+            Dessert: desserts,
+            Divers: extras,
+          }}
+        />
+      </ContentWithPaddingXl>
       <Footer />
     </>
   );

@@ -51,7 +51,7 @@ const SocialLink = styled.a`
   }
 `;
 
-export default () => {
+export default function FiveColumnWithInputForm() {
   return (
     <Container>
       <Content>
@@ -138,4 +138,4 @@ export default () => {
       </Content>
     </Container>
   );
-};
+}

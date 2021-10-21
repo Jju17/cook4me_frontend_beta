@@ -25,7 +25,7 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute right-0 bottom-0 h-64 w-64 opacity-15 transform translate-x-2/3 text-yellow-500`}
 `;
 
-export default ({
+export default function ThreeColumnWithProfileImage({
   subheading = "Testimonials",
   heading = "Customer's Review",
   testimonials = [
@@ -51,7 +51,7 @@ export default ({
       customerName: "Steven",
     },
   ],
-}) => {
+}) {
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -74,4 +74,4 @@ export default ({
       <DecoratorBlob2 />
     </Container>
   );
-};
+}

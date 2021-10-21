@@ -8,8 +8,9 @@ import Features from "../components/features/ThreeColSimple.js";
 import MainFeature from "../components/features/TwoColWithButton.js";
 import TabGrid from "../components/cards/TabCardGrid.js";
 import Testimonial from "../components/testimonials/ThreeColumnWithProfileImage.js";
-import DownloadApp from "../components/cta/DownloadApp.js";
+// import DownloadApp from "../components/cta/DownloadApp.js";
 import Footer from "../components/footers/FiveColumnWithInputForm.js";
+import { ContentWithPaddingXl } from "../components/misc/Layouts.js";
 
 import chefIconImageSrc from "../images/chef-icon.svg";
 import celebrationIconImageSrc from "../images/celebration-icon.svg";
@@ -24,7 +25,7 @@ import {
 export default function Welcome() {
   const Subheading = tw.span`tracking-wider text-sm font-medium`;
   const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
-  const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
+  //   const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
   const Description = tw.span`inline-block mt-8`;
   const imageCss = tw`rounded-4xl`;
 
@@ -100,19 +101,22 @@ export default function Welcome() {
       />
       {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
       <div ref={myMealsRef}>
-        <TabGrid
-          heading={
-            <>
-              Qu'est ce qu'ils nous <HighlightedText>mijotent?</HighlightedText>
-            </>
-          }
-          tabs={{
-            Entree: starters,
-            Plat: mainDishes,
-            Dessert: desserts,
-            Divers: extras,
-          }}
-        />
+        <ContentWithPaddingXl>
+          <TabGrid
+            heading={
+              <>
+                Qu'est ce qu'ils nous{" "}
+                <HighlightedText>mijotent?</HighlightedText>
+              </>
+            }
+            tabs={{
+              Entree: starters,
+              Plat: mainDishes,
+              Dessert: desserts,
+              Divers: extras,
+            }}
+          />
+        </ContentWithPaddingXl>
       </div>
       <Features
         heading={

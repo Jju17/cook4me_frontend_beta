@@ -40,7 +40,7 @@ const Textarea = styled(Input).attrs({ as: "textarea" })`
 
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`;
 
-export default ({
+export default function TwoColContactUsWithIllustrationFullForm({
   subheading = "Contact Us",
   heading = (
     <>
@@ -53,7 +53,7 @@ export default ({
   formAction = "#",
   formMethod = "get",
   textOnLeft = true,
-}) => {
+}) {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   return (
@@ -83,4 +83,4 @@ export default ({
       </TwoColumn>
     </Container>
   );
-};
+}

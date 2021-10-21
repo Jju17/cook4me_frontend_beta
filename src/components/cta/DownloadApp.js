@@ -48,7 +48,7 @@ const DecoratorBlob1 = tw(
 const DecoratorBlob2 = tw(
   SvgDecoratorBlob1
 )`absolute top-0 right-0 w-80 h-80 transform  translate-x-20 -translate-y-64 text-gray-800 opacity-50`;
-export default ({
+export default function DownloadApp({
   subheading = "Télécharger l'App",
   text = "Developers all over the world are happily using Treact.",
   link1Text = "App Store",
@@ -59,7 +59,7 @@ export default ({
   link2IconSrc = googlePlayIconImageSrc,
   pushDownFooter = false,
   imageSrc = mockupImageSrc,
-}) => {
+}) {
   return (
     <Container css={pushDownFooter && tw`mb-20 lg:mb-24`}>
       <Content>
@@ -89,4 +89,4 @@ export default ({
       </Content>
     </Container>
   );
-};
+}

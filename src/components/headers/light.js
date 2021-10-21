@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -72,11 +72,8 @@ export default function Header({
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
 
-  const [isCooker, setIsCooker] = useState(true);
-
-  function handleImgError() {
-    return `/images/avatars/pierre.jpg`;
-  }
+  const isCooker = true;
+  //   const [isCooker, setIsCooker] = useState(true);
 
   const defaultLinks = [
     <NavLinks key={1}>
@@ -111,7 +108,7 @@ export default function Header({
       <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
         {logoLink}
         {user ? (
-          <NavLinks>
+          <NavLinks key={2}>
             {isCooker ? (
               <NavLink to={ROUTES.ADMIN_COOKER}>Mes Plats</NavLink>
             ) : (
@@ -122,7 +119,7 @@ export default function Header({
             <NavLink to={ROUTES.DASHBOARD} arial-label="Home">
               Dashboard
             </NavLink>
-            <NavLink to={ROUTES.DASHBOARD}>Panier</NavLink>
+            <NavLink to={ROUTES.CART}>Panier</NavLink>
 
             <button
               className={`focus:text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 whitespace-nowrap
@@ -168,7 +165,7 @@ export default function Header({
           css={collapseBreakpointCss.mobileNavLinks}
         >
           {user ? (
-            <NavLinks>
+            <NavLinks key={1}>
               {isCooker ? (
                 <NavLink to={ROUTES.ADMIN_COOKER}>Mes Plats</NavLink>
               ) : (
@@ -179,7 +176,7 @@ export default function Header({
               <NavLink to={ROUTES.DASHBOARD} arial-label="Home">
                 Dashboard
               </NavLink>
-              <NavLink to={ROUTES.DASHBOARD}>Panier</NavLink>
+              <NavLink to={ROUTES.CART}>Panier</NavLink>
 
               <button
                 className={`focus:text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 whitespace-nowrap
@@ -202,7 +199,7 @@ export default function Header({
                 <img
                   className="rounded-full h-8 w-8 flex items-end"
                   src={`/images/avatars/${user.displayName}.jpg`}
-                  alt={`${user.displayName} profile picture`}
+                  alt={`${user.displayName} profile`}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = "/images/avatars/pierre.jpg";

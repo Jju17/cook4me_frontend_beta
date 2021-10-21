@@ -44,7 +44,7 @@ const PrimaryButton = styled(PrimaryButtonBase)((props) => [
   props.buttonRounded && tw`rounded-full`,
 ]);
 
-export default ({
+export default function TwoColWithButton({
   subheading = "Our Expertise",
   heading = (
     <>
@@ -63,7 +63,7 @@ export default ({
   imageDecoratorBlob = false,
   imageDecoratorBlobCss = null,
   textOnLeft = true,
-}) => {
+}) {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   return (
@@ -96,4 +96,4 @@ export default ({
       </TwoColumn>
     </Container>
   );
-};
+}

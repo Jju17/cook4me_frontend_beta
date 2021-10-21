@@ -43,7 +43,7 @@ const CardLinks = styled.div`
   }
 `;
 
-export default ({
+export default function ProfileThreeColGrid({
   heading = "Rencontrez La Fine Équipe.",
   subheading = "Notre Équipe",
   description = "Deux passionnés d'entrepreneuriat. A Compléter.",
@@ -83,7 +83,7 @@ export default ({
       ],
     },
   ],
-}) => {
+}) {
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -113,4 +113,4 @@ export default ({
       </ContentWithPaddingXl>
     </Container>
   );
-};
+}

@@ -1,5 +1,5 @@
 import fb from "firebase";
-import { firebase, FieldValue } from "../lib/firebase";
+import { firebase, storage } from "../lib/firebase";
 
 export async function doesUsernameExist(username) {
   const result = await firebase
@@ -43,7 +43,8 @@ export async function getStarters() {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         //   console.log(doc.id, " => ", doc.data());
-        meals.push(doc.data());
+
+        meals.push({ ...doc.data(), id: doc.id });
       });
     })
     .catch((error) => {
@@ -54,6 +55,7 @@ export async function getStarters() {
 
 export async function getMainDishes() {
   let meals = [];
+
   var actualDate = fb.firestore.Timestamp.fromDate(new Date(Date.now()));
 
   await firebase
@@ -66,12 +68,13 @@ export async function getMainDishes() {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         //   console.log(doc.id, " => ", doc.data());
-        meals.push(doc.data());
+        meals.push({ ...doc.data(), id: doc.id });
       });
     })
     .catch((error) => {
       console.log("Error getting documents: ", error);
     });
+
   return meals;
 }
 
@@ -89,7 +92,7 @@ export async function getDesserts() {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         //   console.log(doc.id, " => ", doc.data());
-        meals.push(doc.data());
+        meals.push({ ...doc.data(), id: doc.id });
       });
     })
     .catch((error) => {
@@ -112,7 +115,7 @@ export async function getExtras() {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         //   console.log(doc.id, " => ", doc.data());
-        meals.push(doc.data());
+        meals.push({ ...doc.data(), id: doc.id });
       });
     })
     .catch((error) => {

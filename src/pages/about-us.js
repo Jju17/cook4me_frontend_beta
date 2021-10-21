@@ -10,12 +10,12 @@ import * as ROUTES from "../constants/routes";
 import Features from "../components/features/ThreeColSimple.js";
 import TeamCardGrid from "../components/cards/ProfileThreeColGrid.js";
 
-import SupportIconImage from "../images/support-icon.svg";
+// import SupportIconImage from "../images/support-icon.svg";
 import ShieldIconImage from "../images/shield-icon.svg";
 import CustomerLoveIconImage from "../images/simple-icon.svg";
 
 const Subheading = tw.span`uppercase tracking-wider text-sm`;
-export default () => {
+export default function AboutUs() {
   return (
     <>
       <Header />
@@ -61,4 +61,4 @@ export default () => {
       <Footer />
     </>
   );
-};
+}

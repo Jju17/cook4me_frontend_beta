@@ -12,9 +12,10 @@ const firebaseConfig = {
 };
 
 const firebase = fb.initializeApp(firebaseConfig);
-// const analytics = fb.getAnalytics(firebase);
+var storage = fb.storage();
+// const analytics = fb.getAnalytics(firebaseConfig);
 const { FieldValue } = fb.firestore;
 
 // seedDatabaseMeals(firebase);
 
-export { firebase, FieldValue };
+export { firebase, FieldValue, storage };
