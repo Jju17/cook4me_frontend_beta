@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Header from "../components/headers/light.js";
 import Footer from "../components/footers/FiveColumnWithInputForm";
 import ToCheckOutLight from "../components/headers/ToCheckOutLight";
 import MealsCardsCart from "../components/cards/MealsCardsCart.js";
+import UserContext from "../context/user.js";
 
-import {
-  getStarters,
-  getMainDishes,
-  getDesserts,
-  getExtras,
-} from "../services/firebase";
+import { getCartMeals } from "../services/firebase";
 
 export default function Cart() {
-  const [starters, setStarters] = useState([]);
-  const [mainDishes, setMainDishes] = useState([]);
-  const [desserts, setDessert] = useState([]);
-  const [extras, setExtra] = useState([]);
+  const [meals, setMeals] = useState([]);
+
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    getStarters().then((value) => {
-      setStarters(value);
-    });
-
-    getMainDishes().then((value) => {
-      setMainDishes(value);
-    });
-
-    getDesserts().then((value) => {
-      setDessert(value);
-    });
-
-    getExtras().then((value) => {
-      setExtra(value);
+    getCartMeals(user.uid).then((value) => {
+      setMeals(value);
     });
   }, []);
+
+  useEffect(() => {
+    console.log("meals", meals);
+  }, [meals]);
 
   return (
     <>
@@ -46,14 +33,7 @@ export default function Cart() {
       />
 
       {/* TODO: Lier les plats du client avec le panier */}
-      <MealsCardsCart
-        tabs={{
-          Entree: starters,
-          Plat: mainDishes,
-          Dessert: desserts,
-          Divers: extras,
-        }}
-      />
+      <MealsCardsCart meals />
       <Footer />
     </>
   );

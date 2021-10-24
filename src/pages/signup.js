@@ -105,13 +105,15 @@ export default function SignUp({
       await firebase
         .firestore()
         .collection("users")
-        .add({
+        .doc(createdUserResult.user.uid)
+        .set({
           userId: createdUserResult.user.uid,
           username: fullName.replace(/ /g, "").toLowerCase(),
           fullName,
           emailAddress: emailAddress.toLowerCase(),
           cookers_followed: [],
           dateCreated: Date.now(),
+          cart: [],
         });
 
       history.push(ROUTES.DASHBOARD);

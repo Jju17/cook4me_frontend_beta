@@ -77,114 +77,77 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-export default function MealsCardsCart({ heading, tabs }) {
+export default function MealsCardsCart({ heading, meals }) {
   /*
    * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
    * as the key and value of the key will be its content (as an array of objects).
    * To see what attributes are configurable of each object inside this array see the example above for "Starters".
    */
-  const tabsKeys = Object.keys(tabs);
-  const [activeTab, setActiveTab] = useState(tabsKeys[1]);
+  const tabs = {};
+  meals = [];
 
   return (
     <Container>
       <HeaderRow>
         <Header>{heading && heading}</Header>
         {/* TODO: Refactor pour supprimer la barre de menu */}
-        {/* <TabsControl>
-          {tabs &&
-            Object.keys(tabs).map(
-              (tabName, index) =>
-                tabs[tabName].length > 0 && (
-                  <TabControl
-                    key={index}
-                    active={activeTab === tabName}
-                    onClick={() => setActiveTab(tabName)}
-                  >
-                    {tabName}
-                  </TabControl>
-                )
-            )}
-        </TabsControl> */}
       </HeaderRow>
 
       {/* TODO: Rajouter date & heure de pickup */}
       {/* TODO: Rajouter photos des plas */}
       {/* TODO: Rajouter profil du cooker */}
-      {tabs &&
-        tabsKeys.map((tabKey, index) => (
-          <TabContent
-            key={index}
-            variants={{
-              current: {
-                opacity: 1,
-                scale: 1,
-                display: "flex",
-              },
-              hidden: {
-                opacity: 0,
-                scale: 0.8,
-                display: "none",
-              },
-            }}
-            transition={{ duration: 0.4 }}
-            initial={activeTab === tabKey ? "current" : "hidden"}
-            animate={activeTab === tabKey ? "current" : "hidden"}
-          >
-            {tabs &&
-              tabs[tabKey].map((card, index) => (
-                <CardContainer key={index}>
-                  <Card
-                    className="group"
-                    href={card.url}
-                    initial="rest"
-                    whileHover="hover"
-                    animate="rest"
-                  >
-                    <CardImageContainer imageSrc={card.imageSrc}>
-                      <CardCookerContainer>
-                        <CardCooker></CardCooker>
-                      </CardCookerContainer>
-                      <CardRatingContainer>
-                        <CardRating>
-                          <StarIcon />
-                          {card.rating}
-                        </CardRating>
-                        <CardReview>({card.reviews})</CardReview>
-                      </CardRatingContainer>
-                      <CardHoverOverlay
-                        variants={{
-                          hover: {
-                            opacity: 1,
-                            height: "auto",
-                          },
-                          rest: {
-                            opacity: 0,
-                            height: 0,
-                          },
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <CardButton>Commander</CardButton>
-                      </CardHoverOverlay>
-                    </CardImageContainer>
-                    <CardText>
-                      {/* <CardDueDate>
+      {meals &&
+        meals.forEach((card, index) => (
+          <CardContainer key={index}>
+            <Card
+              className="group"
+              href={card.url}
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+            >
+              <CardImageContainer imageSrc={card.imageSrc}>
+                <CardCookerContainer>
+                  <CardCooker></CardCooker>
+                </CardCookerContainer>
+                <CardRatingContainer>
+                  <CardRating>
+                    <StarIcon />
+                    {card.rating}
+                  </CardRating>
+                  <CardReview>({card.reviews})</CardReview>
+                </CardRatingContainer>
+                <CardHoverOverlay
+                  variants={{
+                    hover: {
+                      opacity: 1,
+                      height: "auto",
+                    },
+                    rest: {
+                      opacity: 0,
+                      height: 0,
+                    },
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <CardButton>Commander</CardButton>
+                </CardHoverOverlay>
+              </CardImageContainer>
+              <CardText>
+                {/* <CardDueDate>
                           A venir chercher le
                           {` ` +
                             card.dateAvailable.toDate().toLocaleDateString()}
                           {` `} à {` `}
                           {card.dateAvailable.toDate().toLocaleTimeString()}
                         </CardDueDate> */}
-                      <CardQty>Il reste {card.qtyAvailable} portions</CardQty>
-                      <CardTitle>{card.title}</CardTitle>
-                      <CardContent>{card.desc}</CardContent>
-                      <CardPrice>{card.price} €</CardPrice>
-                    </CardText>
-                  </Card>
-                </CardContainer>
-              ))}
-          </TabContent>
+                <CardQty>Il reste {card.qtyAvailable} portions</CardQty>
+                <CardTitle>{card.title}</CardTitle>
+                <CardContent>{card.desc}</CardContent>
+                <CardPrice>{card.price} €</CardPrice>
+              </CardText>
+            </Card>
+          </CardContainer>
         ))}
 
       <DecoratorBlob1 />

@@ -49,11 +49,15 @@ export const LogoLink = styled(NavLink)`
 
 export const NavLinkImg = tw.img`display: inline`;
 
-export const MobileNavLinksContainer = tw.nav`flex flex-1 items-center justify-between`;
+export const MobileNavLinksContainer = tw.nav`flex flex-1 items-center justify-between z-50`;
 
-export const NavToggle = tw.button`
-  lg:hidden z-20 focus:outline-none hocus:text-primary-500 transition duration-300
-`;
+export const MyNavToggle = tw.button`lg:hidden z-20 focus:outline-none hocus:text-primary-500 transition duration-300 `;
+
+export const NavToggle = styled(MyNavToggle)((props) => [
+  tw`lg:hidden z-20 focus:outline-none hocus:text-primary-500 transition duration-300`,
+  props.isOpen && tw`fixed top-10 right-10`,
+]);
+
 export const MobileNavLinks = motion(styled.div`
   ${tw`lg:hidden z-10 fixed top-0 inset-x-0 mx-4 my-6 p-8 border text-center rounded-lg text-gray-900 bg-white`}
   ${NavLinks} {
@@ -85,7 +89,7 @@ export default function Header({
       </NavLink>
       <PrimaryLink
         css={roundedHeaderButton && tw`rounded-full`}
-        href={ROUTES.SIGN_UP}
+        to={ROUTES.SIGN_UP}
       >
         S'inscrire
       </PrimaryLink>
@@ -214,6 +218,7 @@ export default function Header({
         <NavToggle
           onClick={toggleNavbar}
           className={showNavLinks ? "open" : "closed"}
+          isOpen={showNavLinks ? true : false}
         >
           {showNavLinks ? (
             <CloseIcon tw="w-6 h-6" />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import tw from "twin.macro";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { getImgUrl } from "../../services/firebase";
 import { firebase, storage } from "../../lib/firebase";
+import { addMealToUserCart, getUserByUserId } from "../../services/firebase";
 
 const CardContainer = tw.div`mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12`;
 const Card = tw(
@@ -61,6 +62,7 @@ export default function MealCard({
   price,
   id,
   dateAvailable,
+  user = null,
 }) {
   const [imgUrl, setImgUrl] = useState(null);
   const mealsPicturesRef = storage.ref("meals");
@@ -76,12 +78,16 @@ export default function MealCard({
         .catch((error) => {
           console.log(error);
         });
-
-      //   console.log("imgUrl", imgUrl);
       return imgUrl;
     }
     getImgUrl();
   }, []);
+
+  function handleOrderClick() {
+    if (user != null) {
+      addMealToUserCart(id, user.uid);
+    }
+  }
 
   return (
     <CardContainer>
@@ -94,13 +100,16 @@ export default function MealCard({
       >
         <CardImageContainer imageSrc={imgUrl}>
           <CardCookerContainer>
-            <CardCooker></CardCooker>
+            <CardCooker>
+              {/* TODO: Add cooker picture on top of the image */}
+            </CardCooker>
           </CardCookerContainer>
           <CardRatingContainer>
             <CardRating>
               <StarIcon />
               {rating}
             </CardRating>
+
             <CardReview>({reviews})</CardReview>
           </CardRatingContainer>
           <CardHoverOverlay
@@ -116,7 +125,9 @@ export default function MealCard({
             }}
             transition={{ duration: 0.3 }}
           >
-            <CardButton>Commander</CardButton>
+            <div>
+              <CardButton onClick={handleOrderClick}>Commander</CardButton>
+            </div>
           </CardHoverOverlay>
         </CardImageContainer>
         <CardText>
@@ -129,7 +140,9 @@ export default function MealCard({
                 dateAvailable.toDate().toLocaleTimeString()}
           </CardDueDate>
           <CardQty>Il reste {qtyAvailable} portions</CardQty>
+          {/* TODO: Limiter le nombre de caractères dans le title */}
           <CardTitle>{title}</CardTitle>
+          {/* TODO: Limiter le nombre de caractères dans la desc */}
           <CardContent>{desc}</CardContent>
           <CardPrice>{price} €</CardPrice>
         </CardText>

@@ -2,6 +2,7 @@
 // import fb from "firebase";
 import fb from "firebase";
 
+// TODO: Penser à review les rules d'accès à la DB et au storage (!)
 const firebaseConfig = {
   apiKey: "AIzaSyAAejfwFFsUN26S8maOuYixGQMXb4x9JdE",
   authDomain: "cook4me-b0856.firebaseapp.com",
@@ -13,9 +14,9 @@ const firebaseConfig = {
 
 const firebase = fb.initializeApp(firebaseConfig);
 var storage = fb.storage();
-// const analytics = fb.getAnalytics(firebaseConfig);
+const analytics = fb.analytics();
 const { FieldValue } = fb.firestore;
 
 // seedDatabaseMeals(firebase);
 
-export { firebase, FieldValue, storage };
+export { analytics, firebase, FieldValue, storage };

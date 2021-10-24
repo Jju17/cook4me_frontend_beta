@@ -123,3 +123,69 @@ export async function getExtras() {
     });
   return meals;
 }
+
+export async function addMealToUserCart(mealId, userId) {
+  await firebase
+    .firestore()
+    .collection("users")
+    .doc(userId)
+    .update({
+      cart: fb.firestore.FieldValue.arrayUnion(mealId),
+    })
+    .then(() => {
+      console.log("Document successfully updated!");
+    });
+}
+
+export async function getCartMeals(userId) {
+  let mealsId = [
+    "NxKPHDvuEP9TXGQAagUm",
+    "QEf9fGF5EmdWRtbyn8dE",
+    "XiBTJT4dOYRBZA1tFkN9",
+  ];
+  let meals = [];
+
+  await firebase
+    .firestore()
+    .collection("users")
+    .doc(userId)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        // mealsId = doc.data().cart;
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document in users, userId!" + userId);
+      }
+    })
+    .catch((error) => {
+      console.log("Error getting document:", error);
+    });
+
+  meals = await getDocMealsCart(mealsId);
+
+  return meals;
+}
+
+export async function getDocMealsCart(mealsId) {
+  let meals = [];
+  console.log("getDocMealsCart fct : ", mealsId);
+
+  await firebase
+    .firestore()
+    .collection("meals")
+    .where("id", "in", mealsId)
+    .get()
+    .then((querySnapshot) => {
+      console.log(querySnapshot);
+      querySnapshot.forEach((doc) => {
+        meals.push(doc);
+        console.log("doc", doc);
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+
+  return meals;
+}

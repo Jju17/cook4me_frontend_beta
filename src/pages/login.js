@@ -58,7 +58,7 @@ const IllustrationImage = styled.div`
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function Login(
-  logoLinkUrl = "welcome",
+  logoLinkUrl = "/",
   illustrationImageSrc = illustration,
   headingText = "Se Connecter sur Cook4Me",
   //   socialButtons = [
