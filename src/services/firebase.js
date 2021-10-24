@@ -174,13 +174,11 @@ export async function getDocMealsCart(mealsId) {
   await firebase
     .firestore()
     .collection("meals")
-    .where("id", "in", mealsId)
+    .where("mealId", "in", mealsId)
     .get()
     .then((querySnapshot) => {
-      console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
-        meals.push(doc);
-        console.log("doc", doc);
+        meals.push(doc.data());
       });
     })
     .catch((error) => {

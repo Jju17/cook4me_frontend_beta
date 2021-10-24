@@ -19,10 +19,6 @@ export default function Cart() {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("meals", meals);
-  }, [meals]);
-
   return (
     <>
       <Header />
@@ -33,7 +29,7 @@ export default function Cart() {
       />
 
       {/* TODO: Lier les plats du client avec le panier */}
-      <MealsCardsCart meals />
+      {meals && <MealsCardsCart meals={meals} />}
       <Footer />
     </>
   );
