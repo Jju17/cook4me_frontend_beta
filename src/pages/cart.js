@@ -17,7 +17,7 @@ export default function Cart() {
     getCartMeals(user.uid).then((value) => {
       setMeals(value);
     });
-  }, []);
+  }, [user.uid]);
 
   return (
     <>

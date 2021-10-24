@@ -2,7 +2,7 @@ import React from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-9.svg";
-import { ContentWithPaddingXl, Container } from "../misc/Layouts";
+import { Container } from "../misc/Layouts";
 
 const PrimaryBackgroundContainer = tw.div`py-16 lg:py-20 bg-purple-200 rounded-lg relative`;
 const Row = tw.div`px-4 sm:px-16 mx-auto flex justify-center items-center relative z-10 flex-col lg:flex-row text-center lg:text-left`;
@@ -21,9 +21,9 @@ const PrimaryLink = tw(
   Link
 )`shadow text-gray-100 hocus:text-gray-300 bg-primary-500 hocus:bg-primary-700`;
 
-const SecondaryLink = tw(
-  Link
-)`text-primary-500 hover:text-primary-600 bg-gray-100 hover:bg-gray-200`;
+// const SecondaryLink = tw(
+//   Link
+// )`text-primary-500 hover:text-primary-600 bg-gray-100 hover:bg-gray-200`;
 
 const DecoratorBlobContainer = tw.div`absolute inset-0 overflow-hidden rounded-lg`;
 const DecoratorBlob1 = tw(

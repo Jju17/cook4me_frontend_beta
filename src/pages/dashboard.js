@@ -24,7 +24,6 @@ export default function Dashboard() {
   const [extras, setExtra] = useState([]);
 
   useEffect(() => {
-    console.log("dashboard user : ", user);
     getStarters().then((value) => {
       setStarters(value);
     });

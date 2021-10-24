@@ -1,5 +1,5 @@
 import fb from "firebase";
-import { firebase, storage } from "../lib/firebase";
+import { firebase } from "../lib/firebase";
 
 export async function doesUsernameExist(username) {
   const result = await firebase

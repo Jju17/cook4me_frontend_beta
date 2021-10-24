@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import tw from "twin.macro";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
 import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { getImgUrl } from "../../services/firebase";
-import { firebase, storage } from "../../lib/firebase";
-import { addMealToUserCart, getUserByUserId } from "../../services/firebase";
+import { storage } from "../../lib/firebase";
+import { addMealToUserCart } from "../../services/firebase";
 
 const CardContainer = tw.div`mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12`;
 const Card = tw(
@@ -49,7 +48,7 @@ const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
 const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600`;
 const CardPrice = tw.p`mt-4 text-xl font-bold`;
 const CardDueDate = tw.p`mt-1 text-sm font-medium text-gray-600`;
-const CardDueTime = tw.p`mt-1 text-sm font-medium text-gray-600`;
+// const CardDueTime = tw.p`mt-1 text-sm font-medium text-gray-600`;
 const CardQty = tw.p`mt-1 text-sm font-medium text-gray-600`;
 
 export default function MealCard({
@@ -81,7 +80,7 @@ export default function MealCard({
       return imgUrl;
     }
     getImgUrl();
-  }, []);
+  }, []); //eslint-disable-line
 
   function handleOrderClick() {
     if (user != null) {

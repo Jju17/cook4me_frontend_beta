@@ -6,11 +6,8 @@ import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { Container } from "../misc/Layouts.js";
 import { SectionHeading } from "../misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons.js";
-import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-7.svg";
-import { firebase, storage } from "../../lib/firebase";
 import MealCardCart from "./meal-card-cart.js";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;

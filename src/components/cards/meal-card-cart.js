@@ -56,7 +56,7 @@ export default function MealCardCart({ card }) {
   const mealsPicturesRef = storage.ref("meals");
 
   useEffect(() => {
-    if (card.mealId != undefined) {
+    if (card.mealId !== undefined) {
       async function getImgUrl() {
         await mealsPicturesRef
           .child(`${card.mealId}.png`)
@@ -71,7 +71,10 @@ export default function MealCardCart({ card }) {
       }
       getImgUrl();
     }
-  }, []);
+  }, []); //eslint-disable-line
+
+  // TODO : handle delete meal from user's cart
+  function handleDeleteOrderClick() {}
 
   return (
     <CardContainer>
@@ -106,7 +109,7 @@ export default function MealCardCart({ card }) {
             }}
             transition={{ duration: 0.3 }}
           >
-            <CardButton>Commander</CardButton>
+            <CardButton onClick={handleDeleteOrderClick}>Supprimer</CardButton>
           </CardHoverOverlay>
         </CardImageContainer>
         <CardText>
