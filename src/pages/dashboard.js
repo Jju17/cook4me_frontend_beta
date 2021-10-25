@@ -12,6 +12,7 @@ import {
   getMainDishes,
   getDesserts,
   getExtras,
+  addMealToUserCart,
 } from "../services/firebase";
 
 export default function Dashboard() {
@@ -45,6 +46,10 @@ export default function Dashboard() {
     document.title = "C4M - Dashboard";
   }, []);
 
+  async function handleOrderClick(mealIdToOrder) {
+    await addMealToUserCart(mealIdToOrder, user.uid);
+  }
+
   return (
     <>
       <Header />
@@ -64,6 +69,7 @@ export default function Dashboard() {
             Divers: extras,
           }}
           user={user}
+          handleOrderClick={handleOrderClick}
         />
       </ContentWithPaddingXl>
       <Footer />

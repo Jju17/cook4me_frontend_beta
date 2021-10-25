@@ -138,11 +138,7 @@ export async function addMealToUserCart(mealId, userId) {
 }
 
 export async function getCartMeals(userId) {
-  let mealsId = [
-    "NxKPHDvuEP9TXGQAagUm",
-    "QEf9fGF5EmdWRtbyn8dE",
-    "XiBTJT4dOYRBZA1tFkN9",
-  ];
+  let mealsId = [];
   let meals = [];
 
   await firebase
@@ -152,7 +148,7 @@ export async function getCartMeals(userId) {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        // mealsId = doc.data().cart;
+        mealsId = doc.data().cart;
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document in users, userId!" + userId);
@@ -186,4 +182,21 @@ export async function getDocMealsCart(mealsId) {
     });
 
   return meals;
+}
+
+export async function deleteMealFromUserCart(mealIdToDelete, user) {
+  let userFirestore = await getUserByUserId(user.uid);
+  console.log("mealIdToDelete", mealIdToDelete);
+  if (userFirestore != undefined && userFirestore.length >= 1) {
+    await firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        cart: fb.firestore.FieldValue.arrayRemove(mealIdToDelete),
+      })
+      .then(() => {
+        console.log("Document successfully updated!");
+      });
+  }
 }

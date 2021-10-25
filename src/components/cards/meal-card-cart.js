@@ -51,7 +51,7 @@ const CardPrice = tw.p`mt-4 text-xl font-bold`;
 // const CardDueTime = tw.p`mt-1 text-sm font-medium text-gray-600`;
 const CardQty = tw.p`mt-1 text-sm font-medium text-gray-600`;
 
-export default function MealCardCart({ card }) {
+export default function MealCardCart({ card, handleDeleteOrderClick }) {
   const [imgUrl, setImgUrl] = useState(null);
   const mealsPicturesRef = storage.ref("meals");
 
@@ -74,7 +74,10 @@ export default function MealCardCart({ card }) {
   }, []); //eslint-disable-line
 
   // TODO : handle delete meal from user's cart
-  function handleDeleteOrderClick() {}
+
+  function handleClick() {
+    handleDeleteOrderClick(card.mealId);
+  }
 
   return (
     <CardContainer>
@@ -109,7 +112,7 @@ export default function MealCardCart({ card }) {
             }}
             transition={{ duration: 0.3 }}
           >
-            <CardButton onClick={handleDeleteOrderClick}>Supprimer</CardButton>
+            <CardButton onClick={handleClick}>Supprimer</CardButton>
           </CardHoverOverlay>
         </CardImageContainer>
         <CardText>

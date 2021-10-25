@@ -51,25 +51,14 @@ const CardDueDate = tw.p`mt-1 text-sm font-medium text-gray-600`;
 // const CardDueTime = tw.p`mt-1 text-sm font-medium text-gray-600`;
 const CardQty = tw.p`mt-1 text-sm font-medium text-gray-600`;
 
-export default function MealCard({
-  url,
-  rating,
-  reviews,
-  qtyAvailable,
-  title,
-  desc,
-  price,
-  id,
-  dateAvailable,
-  user = null,
-}) {
+export default function MealCard({ card, handleOrderClick }) {
   const [imgUrl, setImgUrl] = useState(null);
   const mealsPicturesRef = storage.ref("meals");
 
   useEffect(() => {
     async function getImgUrl() {
       await mealsPicturesRef
-        .child(`${id}.png`)
+        .child(`${card.id}.png`)
         .getDownloadURL()
         .then((url) => {
           setImgUrl(url);
@@ -82,17 +71,15 @@ export default function MealCard({
     getImgUrl();
   }, []); //eslint-disable-line
 
-  function handleOrderClick() {
-    if (user != null) {
-      addMealToUserCart(id, user.uid);
-    }
+  function handleClick() {
+    handleOrderClick(card.mealId);
   }
 
   return (
     <CardContainer>
       <Card
         className="group"
-        href={url}
+        href={card.url}
         initial="rest"
         whileHover="hover"
         animate="rest"
@@ -106,10 +93,10 @@ export default function MealCard({
           <CardRatingContainer>
             <CardRating>
               <StarIcon />
-              {rating}
+              {card.rating}
             </CardRating>
 
-            <CardReview>({reviews})</CardReview>
+            <CardReview>({card.reviews})</CardReview>
           </CardRatingContainer>
           <CardHoverOverlay
             variants={{
@@ -125,25 +112,25 @@ export default function MealCard({
             transition={{ duration: 0.3 }}
           >
             <div>
-              <CardButton onClick={handleOrderClick}>Commander</CardButton>
+              <CardButton onClick={handleClick}>Commander</CardButton>
             </div>
           </CardHoverOverlay>
         </CardImageContainer>
         <CardText>
           <CardDueDate>
             A venir chercher le
-            {dateAvailable &&
+            {card.dateAvailable &&
               ` ` +
-                dateAvailable.toDate().toLocaleDateString() +
+                card.dateAvailable.toDate().toLocaleDateString() +
                 ` à ` +
-                dateAvailable.toDate().toLocaleTimeString()}
+                card.dateAvailable.toDate().toLocaleTimeString()}
           </CardDueDate>
-          <CardQty>Il reste {qtyAvailable} portions</CardQty>
+          <CardQty>Il reste {card.qtyAvailable} portions</CardQty>
           {/* TODO: Limiter le nombre de caractères dans le title */}
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>{card.title}</CardTitle>
           {/* TODO: Limiter le nombre de caractères dans la desc */}
-          <CardContent>{desc}</CardContent>
-          <CardPrice>{price} €</CardPrice>
+          <CardContent>{card.desc}</CardContent>
+          <CardPrice>{card.price} €</CardPrice>
         </CardText>
       </Card>
     </CardContainer>

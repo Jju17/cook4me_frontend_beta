@@ -23,7 +23,11 @@ const TabContent = tw(
   motion.div
 )`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
-export default function MealsCardsCart({ heading, meals }) {
+export default function MealsCardsCart({
+  heading,
+  meals,
+  handleDeleteOrderClick,
+}) {
   /*
    * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
    * as the key and value of the key will be its content (as an array of objects).
@@ -62,7 +66,11 @@ export default function MealsCardsCart({ heading, meals }) {
       >
         {myMeals &&
           myMeals.map((card, index) => (
-            <MealCardCart card={card} key={index} />
+            <MealCardCart
+              card={card}
+              key={index}
+              handleDeleteOrderClick={handleDeleteOrderClick}
+            />
           ))}
       </TabContent>
       <DecoratorBlob1 />
