@@ -16,10 +16,7 @@ const LinksContainer = tw(
   ColumnContainer
 )`flex justify-center lg:justify-end mt-6 lg:mt-0 flex-col sm:flex-row`;
 
-const Link = tw.a`w-full sm:w-auto text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 mt-4 first:mt-0 sm:mt-0 sm:mr-8 sm:last:mr-0 rounded font-bold border border-transparent tracking-wide transition duration-300 focus:outline-none focus:shadow-outline`;
-const PrimaryLink = tw(
-  Link
-)`shadow text-gray-100 hocus:text-gray-300 bg-primary-500 hocus:bg-primary-700`;
+const PrimaryButton = tw.button`w-full sm:w-auto text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 mt-4 first:mt-0 sm:mt-0 sm:mr-8 sm:last:mr-0 rounded font-bold border border-transparent tracking-wide transition duration-300 focus:outline-none focus:shadow-outline shadow text-gray-100 hocus:text-gray-300 bg-primary-500 hocus:bg-primary-700`;
 
 // const SecondaryLink = tw(
 //   Link
@@ -50,7 +47,10 @@ export default function ToCheckOutLight({
             <Heading>{heading}</Heading>
           </TextContainer>
           <LinksContainer>
-            <PrimaryLink href={primaryLinkUrl}>{primaryLinkText}</PrimaryLink>
+            {/* <PrimaryLink href={primaryLinkUrl}>{primaryLinkText}</PrimaryLink> */}
+            <form action="/create-checkout-session" method="POST">
+              <PrimaryButton type="submit">{primaryLinkText}</PrimaryButton>
+            </form>
             {/* <SecondaryLink href={secondaryLinkUrl}>
               {secondaryLinkText && secondaryLinkText}
             </SecondaryLink> */}

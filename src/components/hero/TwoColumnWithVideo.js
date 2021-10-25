@@ -76,7 +76,7 @@ export default function Hero({
 
   return (
     <>
-      <Header />
+      <Header key={1} />
       <Container>
         <TwoColumn>
           <LeftColumn>

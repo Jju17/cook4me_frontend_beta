@@ -80,7 +80,7 @@ export default function Header({
   //   const [isCooker, setIsCooker] = useState(true);
 
   const defaultLinks = [
-    <NavLinks key={1}>
+    <NavLinks>
       <NavLink to={ROUTES.BECOMING_COOKER}>Devenir un Cooker</NavLink>
       <NavLink to={ROUTES.ABOUT_US}>A propos</NavLink>
       <NavLink to={ROUTES.CONTACT_US}>Nous Contacter</NavLink>
@@ -101,7 +101,7 @@ export default function Header({
     collapseBreakPointCssMap[collapseBreakpointClass];
 
   const logoLink = [
-    <LogoLink to="/">
+    <LogoLink to="/" key={1}>
       <img src={logo} alt="logo" />
       Cook4Me
     </LogoLink>,
@@ -112,7 +112,7 @@ export default function Header({
       <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
         {logoLink}
         {user ? (
-          <NavLinks key={2}>
+          <NavLinks>
             {isCooker ? (
               <NavLink to={ROUTES.ADMIN_COOKER}>Mes Plats</NavLink>
             ) : (
@@ -169,7 +169,7 @@ export default function Header({
           css={collapseBreakpointCss.mobileNavLinks}
         >
           {user ? (
-            <NavLinks key={1}>
+            <NavLinks>
               {isCooker ? (
                 <NavLink to={ROUTES.ADMIN_COOKER}>Mes Plats</NavLink>
               ) : (

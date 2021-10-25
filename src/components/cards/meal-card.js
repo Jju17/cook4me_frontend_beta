@@ -72,7 +72,9 @@ export default function MealCard({ card, handleOrderClick }) {
   }, []); //eslint-disable-line
 
   function handleClick() {
-    handleOrderClick(card.mealId);
+    if (handleOrderClick) {
+      handleOrderClick(card.mealId);
+    }
   }
 
   return (

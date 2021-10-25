@@ -187,7 +187,7 @@ export async function getDocMealsCart(mealsId) {
 export async function deleteMealFromUserCart(mealIdToDelete, user) {
   let userFirestore = await getUserByUserId(user.uid);
   console.log("mealIdToDelete", mealIdToDelete);
-  if (userFirestore != undefined && userFirestore.length >= 1) {
+  if (userFirestore !== undefined && userFirestore.length >= 1) {
     await firebase
       .firestore()
       .collection("users")
