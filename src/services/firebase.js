@@ -165,21 +165,22 @@ export async function getCartMeals(userId) {
 
 export async function getDocMealsCart(mealsId) {
   let meals = [];
-  console.log("getDocMealsCart fct : ", mealsId);
 
-  await firebase
-    .firestore()
-    .collection("meals")
-    .where("mealId", "in", mealsId)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        meals.push(doc.data());
+  if (mealsId.length > 0) {
+    await firebase
+      .firestore()
+      .collection("meals")
+      .where("mealId", "in", mealsId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          meals.push(doc.data());
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
       });
-    })
-    .catch((error) => {
-      console.log("Error getting documents: ", error);
-    });
+  }
 
   return meals;
 }

@@ -40,7 +40,7 @@ const Heading = tw(
 const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 
 const PrimaryButton = styled(PrimaryButtonBase)((props) => [
-  tw`mt-8 md:mt-8 text-sm inline-block mx-auto md:mx-0`,
+  tw`mt-8 md:mt-8 text-sm inline-block mx-auto md:mx-0 cursor-pointer`,
   props.buttonRounded && tw`rounded-full`,
 ]);
 
@@ -53,7 +53,6 @@ export default function TwoColWithButton({
   ),
   description = "",
   primaryButtonText = "Learn More",
-  primaryButtonUrl = "#",
   imageSrc = TeamIllustrationSrc,
   buttonRounded = true,
   imageRounded = true,
@@ -63,6 +62,7 @@ export default function TwoColWithButton({
   imageDecoratorBlob = false,
   imageDecoratorBlobCss = null,
   textOnLeft = true,
+  executeScroll,
 }) {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
@@ -87,7 +87,7 @@ export default function TwoColWithButton({
             <PrimaryButton
               buttonRounded={buttonRounded}
               as="a"
-              href={primaryButtonUrl}
+              onClick={executeScroll}
             >
               {primaryButtonText}
             </PrimaryButton>

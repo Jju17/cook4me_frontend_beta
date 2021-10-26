@@ -83,12 +83,13 @@ export default function Welcome() {
         }
         description={
           <Description>
-            Description
+            Grâce à nos Cookers passionés de cuisine, C4M offre une large gamme
+            de repas frais et de saison, n'hésite pas a scroller pour voir les
+            repas de la semaine !
             <br />
-            <br />
-            Description 2
           </Description>
         }
+        executeScroll={executeScroll}
         buttonRounded={false}
         textOnLeft={false}
         primaryButtonText="Voir les plats du jour"
