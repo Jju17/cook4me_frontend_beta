@@ -49,7 +49,7 @@ export default function ProfileThreeColGrid({
   description = "Deux passionnés d'entrepreneuriat. A Compléter.",
   cards = [
     {
-      imageSrc: "./images/profile/julien.jpg",
+      imageSrc: "/images/avatars/julienrahier.jpg",
       position: "Co-Founder",
       name: "Julien Rahier",
       links: [
@@ -68,7 +68,7 @@ export default function ProfileThreeColGrid({
       ],
     },
     {
-      imageSrc: "./images/profile/pierre.jpg",
+      imageSrc: "/images/avatars/pierreparent.jpg",
       position: "Co-Founder",
       name: "Pierre Parent",
       links: [
