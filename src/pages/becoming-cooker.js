@@ -14,24 +14,7 @@ export default function BecomingCooker() {
   return (
     <>
       <Header />
-      <ContactUsForm />
-      <ContactDetails
-        cards={[
-          {
-            title: "Louvain-La-Neuve",
-            description: (
-              <>
-                <Address>
-                  <AddressLine>Chemin du Cyclotron 6</AddressLine>
-                  <AddressLine>1348 Ottignies-Louvain-la-Neuve</AddressLine>
-                </Address>
-                <Email>cook4me.contact@gmail.com</Email>
-                <Phone>+32 479 50 68 41</Phone>
-              </>
-            ),
-          },
-        ]}
-      />
+
       <Footer />
     </>
   );
